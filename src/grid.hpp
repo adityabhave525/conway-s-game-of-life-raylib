@@ -8,6 +8,10 @@ public:
         : rows(height / cell_size), columns(width / cell_size), cell_size(cell_size), cells(rows, std::vector<int>(columns, 0)) {};
     void Draw();
     void SetValue(int row, int column, int value);
+    int GetValue(int row, int column);
+    bool IsWithinBounds(int row, int column);
+    int GetRows() { return rows; }
+    int GetColumns() { return columns; }
 
 private:
     int rows;
