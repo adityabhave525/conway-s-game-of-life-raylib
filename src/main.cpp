@@ -19,6 +19,13 @@ int main()
     while (!WindowShouldClose())
     {
         // 1. Event Handling
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            Vector2 mouse_position = GetMousePosition();
+            int row = mouse_position.y / CELL_SIZE;
+            int column = mouse_position.x / CELL_SIZE;
+            simulation.ToggleCell(row, column);
+        }
         if (IsKeyPressed(KEY_ENTER))
         {
             simulation.Start();
@@ -41,6 +48,14 @@ int main()
                 FPS -= 2;
                 SetTargetFPS(FPS);
             }
+        }
+        else if (IsKeyPressed(KEY_R))
+        {
+            simulation.CreateRandomState();
+        }
+        else if (IsKeyPressed(KEY_C))
+        {
+            simulation.ClearGrid();
         }
 
         // 2. Updating State
