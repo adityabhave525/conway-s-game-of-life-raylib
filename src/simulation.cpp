@@ -37,3 +37,40 @@ int Simulation::CountLiveNeighbors(int row, int column)
 
     return live_neighbors;
 }
+
+void Simulation::Update()
+{
+    for (int row = 0; row < grid.GetRows(); row++)
+    {
+        for (int column = 0; column < grid.GetColumns(); column++)
+        {
+            int live_neighbors = CountLiveNeighbors(row, column);
+            int cell_value = grid.GetValue(row, column);
+
+            if (cell_value == 1)
+            {
+                if (live_neighbors > 3 || live_neighbors < 2)
+                {
+                    temp_grid.SetValue(row, column, 0);
+                }
+                else
+                {
+                    temp_grid.SetValue(row, column, 1);
+                }
+            }
+            else
+            {
+                if (live_neighbors == 3)
+                {
+                    temp_grid.SetValue(row, column, 1);
+                }
+                else
+                {
+                    temp_grid.SetValue(row, column, 0);
+                }
+            }
+        }
+    }
+
+    grid = temp_grid;
+}

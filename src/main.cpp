@@ -1,5 +1,4 @@
 #include <raylib.h>
-#include <iostream>
 #include "simulation.hpp"
 
 int main()
@@ -15,12 +14,6 @@ int main()
 
     SetTargetFPS(FPS);
     Simulation simulation{WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE};
-    simulation.SetCellValue(5, 29, 1);
-    simulation.SetCellValue(6, 0, 1);
-    simulation.SetCellValue(5, 0, 1);
-    simulation.SetCellValue(4, 0, 1);
-
-    std::cout << simulation.CountLiveNeighbors(5, 29) << '\n';
 
     // Simulation Loop
     while (!WindowShouldClose())
@@ -28,6 +21,7 @@ int main()
         // 1. Event Handling
 
         // 2. Updating State
+        simulation.Update();
 
         // 3. Drawing
         BeginDrawing();
