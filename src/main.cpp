@@ -19,6 +19,29 @@ int main()
     while (!WindowShouldClose())
     {
         // 1. Event Handling
+        if (IsKeyPressed(KEY_ENTER))
+        {
+            simulation.Start();
+            SetWindowTitle("Game of life is running...");
+        }
+        else if (IsKeyPressed(KEY_SPACE))
+        {
+            simulation.Stop();
+            SetWindowTitle("Game of life has stopped...");
+        }
+        else if (IsKeyPressed(KEY_F))
+        {
+            FPS += 2;
+            SetTargetFPS(FPS);
+        }
+        else if (IsKeyPressed(KEY_S))
+        {
+            if (FPS > 5)
+            {
+                FPS -= 2;
+                SetTargetFPS(FPS);
+            }
+        }
 
         // 2. Updating State
         simulation.Update();

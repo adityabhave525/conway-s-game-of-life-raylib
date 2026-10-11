@@ -40,37 +40,40 @@ int Simulation::CountLiveNeighbors(int row, int column)
 
 void Simulation::Update()
 {
-    for (int row = 0; row < grid.GetRows(); row++)
+    if (IsRunning())
     {
-        for (int column = 0; column < grid.GetColumns(); column++)
+        for (int row = 0; row < grid.GetRows(); row++)
         {
-            int live_neighbors = CountLiveNeighbors(row, column);
-            int cell_value = grid.GetValue(row, column);
+            for (int column = 0; column < grid.GetColumns(); column++)
+            {
+                int live_neighbors = CountLiveNeighbors(row, column);
+                int cell_value = grid.GetValue(row, column);
 
-            if (cell_value == 1)
-            {
-                if (live_neighbors > 3 || live_neighbors < 2)
+                if (cell_value == 1)
                 {
-                    temp_grid.SetValue(row, column, 0);
+                    if (live_neighbors > 3 || live_neighbors < 2)
+                    {
+                        temp_grid.SetValue(row, column, 0);
+                    }
+                    else
+                    {
+                        temp_grid.SetValue(row, column, 1);
+                    }
                 }
                 else
                 {
-                    temp_grid.SetValue(row, column, 1);
-                }
-            }
-            else
-            {
-                if (live_neighbors == 3)
-                {
-                    temp_grid.SetValue(row, column, 1);
-                }
-                else
-                {
-                    temp_grid.SetValue(row, column, 0);
+                    if (live_neighbors == 3)
+                    {
+                        temp_grid.SetValue(row, column, 1);
+                    }
+                    else
+                    {
+                        temp_grid.SetValue(row, column, 0);
+                    }
                 }
             }
         }
-    }
 
-    grid = temp_grid;
+        grid = temp_grid;
+    }
 }
